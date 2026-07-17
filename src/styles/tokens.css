@@ -1,0 +1,125 @@
+/* ============================================================
+   HORIZONX DESIGN SYSTEM — TOKENS
+   The single source of truth for color, type, space, motion.
+   ============================================================ */
+
+:root {
+  /* ---------- Color · Environment ---------- */
+  --hx-void: #030309;            /* infinite space */
+  --hx-deep: #06060f;            /* deep panel background */
+  --hx-surface: #0a0a16;         /* raised surface */
+  --hx-line: rgba(255, 255, 255, 0.08);
+  --hx-line-strong: rgba(255, 255, 255, 0.16);
+
+  /* ---------- Color · Ink ---------- */
+  --hx-ink: #f4f5ff;
+  --hx-ink-dim: rgba(230, 233, 255, 0.62);
+  --hx-ink-faint: rgba(230, 233, 255, 0.38);
+
+  /* ---------- Color · Stage spectrum (0% → 100%) ---------- */
+  --hx-stage-0: #3d4066;         /* offline — dormant slate */
+  --hx-xability: #ff5fa2;        /* 30% — creative energy */
+  --hx-xsite: #2ea8ff;           /* 60% — web clarity */
+  --hx-xapps: #7c6cff;           /* 80% — systems violet */
+  --hx-xauto: #ffb648;           /* 90% — kinetic amber */
+  --hx-xai: #39ffc5;             /* 100% — intelligence mint */
+
+  --hx-gradient-index: linear-gradient(
+    90deg,
+    var(--hx-xability) 0%,
+    var(--hx-xsite) 30%,
+    var(--hx-xapps) 60%,
+    var(--hx-xauto) 80%,
+    var(--hx-xai) 100%
+  );
+
+  /* ---------- Glass materials ---------- */
+  --hx-glass: rgba(255, 255, 255, 0.04);
+  --hx-glass-strong: rgba(255, 255, 255, 0.07);
+  --hx-glass-blur: 22px;
+  --hx-glass-border: 1px solid rgba(255, 255, 255, 0.1);
+  --hx-glass-highlight: linear-gradient(
+    140deg,
+    rgba(255, 255, 255, 0.14) 0%,
+    rgba(255, 255, 255, 0.02) 32%,
+    rgba(255, 255, 255, 0) 60%
+  );
+
+  /* ---------- Elevation / lighting ---------- */
+  --hx-shadow-1: 0 2px 12px rgba(0, 0, 0, 0.45);
+  --hx-shadow-2: 0 12px 40px rgba(0, 0, 0, 0.55);
+  --hx-shadow-3: 0 32px 90px rgba(0, 0, 0, 0.65);
+  --hx-glow-soft: 0 0 40px;
+  --hx-glow-strong: 0 0 90px;
+
+  /* ---------- Typography ---------- */
+  --hx-font-display: "Space Grotesk Variable", "Inter Variable", system-ui, sans-serif;
+  --hx-font-body: "Inter Variable", system-ui, sans-serif;
+  --hx-font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  --hx-text-hero: clamp(3.4rem, 9.5vw, 8.5rem);
+  --hx-text-display: clamp(2.4rem, 5.5vw, 4.8rem);
+  --hx-text-title: clamp(1.6rem, 3vw, 2.6rem);
+  --hx-text-lead: clamp(1.05rem, 1.6vw, 1.35rem);
+  --hx-text-body: 1rem;
+  --hx-text-small: 0.875rem;
+  --hx-text-micro: 0.72rem;
+
+  --hx-tracking-tight: -0.035em;
+  --hx-tracking-wide: 0.22em;
+
+  /* ---------- Spacing scale (8pt base) ---------- */
+  --hx-s1: 0.25rem;
+  --hx-s2: 0.5rem;
+  --hx-s3: 0.75rem;
+  --hx-s4: 1rem;
+  --hx-s5: 1.5rem;
+  --hx-s6: 2rem;
+  --hx-s7: 3rem;
+  --hx-s8: 4.5rem;
+  --hx-s9: 7rem;
+  --hx-s10: 10rem;
+
+  /* ---------- Grid ---------- */
+  --hx-max-width: 1280px;
+  --hx-gutter: clamp(1.25rem, 4vw, 3rem);
+
+  /* ---------- Radii ---------- */
+  --hx-r-s: 10px;
+  --hx-r-m: 18px;
+  --hx-r-l: 28px;
+  --hx-r-pill: 999px;
+
+  /* ---------- Motion tokens ---------- */
+  --hx-ease-out: cubic-bezier(0.16, 1, 0.3, 1);       /* expo-out: entrances */
+  --hx-ease-inout: cubic-bezier(0.65, 0, 0.35, 1);    /* camera moves */
+  --hx-ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);/* playful pops */
+  --hx-dur-fast: 180ms;
+  --hx-dur-base: 320ms;
+  --hx-dur-slow: 700ms;
+  --hx-dur-cinematic: 1400ms;
+}
+
+/* Light mode exists as a token layer for embedded product surfaces
+   (docs, calculator export). The flagship journey remains dark. */
+[data-theme="light"] {
+  --hx-void: #f4f5fa;
+  --hx-deep: #ffffff;
+  --hx-surface: #ffffff;
+  --hx-line: rgba(10, 12, 40, 0.1);
+  --hx-line-strong: rgba(10, 12, 40, 0.2);
+  --hx-ink: #0b0d1f;
+  --hx-ink-dim: rgba(11, 13, 31, 0.65);
+  --hx-ink-faint: rgba(11, 13, 31, 0.4);
+  --hx-glass: rgba(255, 255, 255, 0.6);
+  --hx-glass-strong: rgba(255, 255, 255, 0.8);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --hx-dur-fast: 0ms;
+    --hx-dur-base: 0ms;
+    --hx-dur-slow: 0ms;
+    --hx-dur-cinematic: 0ms;
+  }
+}
