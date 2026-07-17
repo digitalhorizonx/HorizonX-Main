@@ -22,11 +22,12 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
-      - run: npm run build -- --base=/HorizonX-Main/
+      - run: npm run build
       - name: Publish dist to gh-pages
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          echo "horizonx.site" > dist/CNAME
           touch dist/.nojekyll
           cd dist
           git init -b gh-pages
