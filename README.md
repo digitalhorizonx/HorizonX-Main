@@ -5,7 +5,7 @@ WebGL journey that carries visitors from **0% to 100% digitalization**, shows
 how the five products form **one connected network** under the **XBrain**
 intelligence layer, and routes every visitor to their next step.
 
-![Stack](https://img.shields.io/badge/React-18-blue) ![Three.js](https://img.shields.io/badge/Three.js-R3F-black) ![GSAP](https://img.shields.io/badge/GSAP-ScrollTrigger-88ce02) ![Tests](https://img.shields.io/badge/Playwright-63%20tests-45ba4b)
+![Stack](https://img.shields.io/badge/React-18-blue) ![Three.js](https://img.shields.io/badge/Three.js-R3F-black) ![GSAP](https://img.shields.io/badge/GSAP-ScrollTrigger-88ce02) ![Tests](https://img.shields.io/badge/Playwright-106%20tests-45ba4b)
 
 ## The network
 
@@ -35,6 +35,24 @@ AI capabilities for client businesses. XBrain is **not** a sixth index stage.
 shader color stops, journey math, assessment scoring, and the test suite. Do
 not change them in one place.
 
+## Languages & themes
+
+Six languages — **English** (default, canonical at bare paths), **العربية**
+(`/ar`, full RTL with the Cairo face), **Français** (`/fr`), **Español**
+(`/es`), **Deutsch** (`/de`), **Türkçe** (`/tr`) — via a typed in-repo i18n
+core with compile-time translation completeness and lazy per-locale chunks
+(~7 kB gzip each). **System / Light / Dark** themes ride a semantic token
+architecture with a hashed no-flash script; the WebGL journey is the dark
+experience, light renders a designed static atmosphere. How each works and
+how to extend them: [docs/INTERNATIONALIZATION.md](docs/INTERNATIONALIZATION.md)
+· [docs/THEME_SYSTEM.md](docs/THEME_SYSTEM.md).
+
+SEO: per-locale metadata with canonical + hreflang/x-default graphs,
+centralized truthful JSON-LD, and a build-time generated sitemap (20 URLs)
+— [docs/SEO_ARCHITECTURE.md](docs/SEO_ARCHITECTURE.md). Sector landing
+pages (`/digital-transformation/*`, Restaurants & Clinics live) use a typed
+data-driven content model — [docs/CONTENT_SEO_ROADMAP.md](docs/CONTENT_SEO_ROADMAP.md).
+
 Full ecosystem layering, URL ownership, deployment status matrix, and the
 temporary-domain migration plan: [docs/ECOSYSTEM_ARCHITECTURE.md](docs/ECOSYSTEM_ARCHITECTURE.md).
 Future platform boundaries: [docs/XBRAIN_ARCHITECTURE.md](docs/XBRAIN_ARCHITECTURE.md).
@@ -52,15 +70,18 @@ npm run preview    # serve dist/ with SPA fallback (matches production routing)
 ### Test
 
 ```bash
-npm run build && npm run test:e2e   # 63 Playwright tests against the production build
+npm run build && npm run test:e2e   # 106 Playwright tests against the production build
 npm run test:e2e:ui                 # interactive runner
 ```
 
-The suite covers the scroll journey, index math, assessment scoring (unit
-specs over all 32 answer combinations), routing (including direct /investors
-and /xbrain hits), centralized link integrity, mobile navigation, reduced
-motion, and no-horizontal-overflow at 390/768/1440. External product sites
-are never navigated to — only generated hrefs are asserted, so third-party
+The 106-test suite covers the scroll journey, index math, assessment
+scoring (all 32 combinations), routing including direct localized-route
+refreshes, six-language loading with Arabic RTL, language-selector and
+theme-control accessibility and persistence, canonical/hreflang/JSON-LD
+integrity, sitemap/robots coverage, sector pages, centralized link
+integrity, mobile navigation in LTR and RTL, reduced motion, and
+no-horizontal-overflow at 390/768/1440. External product sites are never
+navigated to — only generated hrefs are asserted, so third-party
 availability can't break CI.
 
 ## Architecture
@@ -75,7 +96,10 @@ src/
 │   ├── usePageMeta.ts   # per-route title/description/canonical/OG
 │   ├── progressStore.ts # frame-rate-friendly journey state
 │   └── useJourney.ts    # Lenis + ScrollTrigger + piecewise index math
-├── pages/               # HomePage · XBrainPage · InvestorsPage · NotFoundPage
+├── pages/               # HomePage · XBrainPage · InvestorsPage · SectorPage · NotFoundPage
+├── i18n/                # typed dictionaries (en·ar·fr·es·de·tr) + provider
+├── content/             # data-driven sector registry
+├── seo/                 # schema builders + shared route data
 ├── three/               # SceneLoader (lazy + fallback) · Scene · IndexSphere · Starfield
 ├── components/          # Nav, worlds, XBrain network, assessment, XVerse, footer…
 └── styles/              # tokens.css (design system) · global.css · components.css
@@ -84,7 +108,7 @@ src/
 Design language: [DESIGN_SYSTEM.md](DESIGN_SYSTEM.md).
 
 **Performance:** the Three.js stack (~237 kB gz) loads via dynamic import
-after first paint; initial JS is ~114 kB gz. `SceneLoader` detects WebGL and
+after first paint; initial JS is ~123 kB gz (incl. the English dictionary). `SceneLoader` detects WebGL and
 falls back to a static CSS deep-space backdrop (also used on scene failure —
 no critical information lives only in the canvas). `prefers-reduced-motion`
 collapses durations, skips the preloader, and drops the canvas to
