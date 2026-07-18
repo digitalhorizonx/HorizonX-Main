@@ -1,5 +1,5 @@
 import { useCallback, useState } from "react";
-import { Scene } from "../three/Scene";
+import { SceneLoader } from "../three/SceneLoader";
 import { useJourney } from "../lib/useJourney";
 import { usePageMeta } from "../lib/usePageMeta";
 import { WORLDS } from "../lib/worlds";
@@ -35,7 +35,7 @@ export function HomePage() {
   return (
     <>
       {!preloaderPlayed && <Preloader onDone={onPreloaderDone} />}
-      <Scene />
+      <SceneLoader />
       <ProgressRail />
       <main className="page">
         <Hero />

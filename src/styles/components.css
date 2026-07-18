@@ -7,6 +7,19 @@
   z-index: 1;
 }
 
+/* Static backdrop while the WebGL bundle loads, or when WebGL is unavailable */
+.scene-fallback {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(720px 720px at 50% 58%, rgba(90, 94, 138, 0.22), transparent 65%),
+    radial-gradient(1100px 700px at 80% -5%, rgba(124, 108, 255, 0.1), transparent 60%),
+    radial-gradient(900px 650px at 12% 100%, rgba(46, 168, 255, 0.07), transparent 60%),
+    var(--hx-void);
+}
+
 /* ================= PRELOADER ================= */
 .preloader {
   position: fixed;

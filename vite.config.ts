@@ -7,8 +7,10 @@ export default defineConfig({
     chunkSizeWarningLimit: 1400,
     rollupOptions: {
       output: {
+        // The WebGL stack is isolated automatically by the dynamic import in
+        // SceneLoader; listing it here (object form) would force a static
+        // modulepreload edge from the entry and defeat the lazy load.
         manualChunks: {
-          three: ["three", "@react-three/fiber", "@react-three/drei", "@react-three/postprocessing"],
           motion: ["gsap", "lenis"],
         },
       },
