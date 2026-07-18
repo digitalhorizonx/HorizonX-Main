@@ -2,6 +2,7 @@ import { useCallback, useState } from "react";
 import { SceneLoader } from "../three/SceneLoader";
 import { useJourney } from "../lib/useJourney";
 import { usePageMeta } from "../lib/usePageMeta";
+import { useI18n } from "../i18n";
 import { WORLDS } from "../lib/worlds";
 import { Preloader } from "../components/Preloader";
 import { ProgressRail } from "../components/ProgressRail";
@@ -17,6 +18,7 @@ import { XVerse } from "../components/XVerse";
 let preloaderPlayed = false;
 
 export function HomePage() {
+  const { t } = useI18n();
   const [ready, setReady] = useState(preloaderPlayed);
   const onPreloaderDone = useCallback(() => {
     preloaderPlayed = true;
@@ -24,9 +26,8 @@ export function HomePage() {
   }, []);
 
   usePageMeta({
-    title: "HorizonX — The Digitalization Intelligence Network",
-    description:
-      "HorizonX connects marketing, websites, business applications, automation, and AI through one digitalization intelligence network for growing businesses. From 0% to 100% digitalization.",
+    title: t.meta.home.title,
+    description: t.meta.home.description,
     path: "/",
   });
 

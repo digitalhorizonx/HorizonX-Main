@@ -1,28 +1,30 @@
 import { WORLDS, XVERSE_URL } from "../lib/worlds";
+import { useI18n } from "../i18n";
 
 /**
  * Final beat: the whole ecosystem, one portal.
  */
 export function XVerse() {
+  const { t, href } = useI18n();
+
   return (
     <section id="xverse" className="xverse">
       <div className="hx-container xverse__inner">
-        <p className="hx-kicker hx-reveal">XVerse</p>
+        <p className="hx-kicker hx-reveal">{t.xverse.kicker}</p>
         <h2 className="xverse__title hx-reveal" data-delay="0.08">
-          Step inside the
+          {t.xverse.titleA}
           <br />
-          <span className="xverse__title-gradient">entire ecosystem.</span>
+          <span className="xverse__title-gradient">{t.xverse.titleB}</span>
         </h2>
         <p className="xverse__lead hx-reveal" data-delay="0.16">
-          XVerse is the live demo universe of HorizonX — every platform, every
-          stage, running. See what 100% feels like before you begin.
+          {t.xverse.lead}
         </p>
         <div className="xverse__actions hx-reveal" data-delay="0.24">
           <a className="hx-btn hx-btn--primary" href={XVERSE_URL} target="_blank" rel="noopener noreferrer">
-            Launch XVerse <span className="hx-btn__arrow">→</span>
+            {t.xverse.launch} <span className="hx-btn__arrow">→</span>
           </a>
-          <a className="hx-btn hx-btn--ghost" href="#calculator">
-            Calculate your Index
+          <a className="hx-btn hx-btn--ghost" href={href("/#calculator")}>
+            {t.xverse.calculate}
           </a>
         </div>
 

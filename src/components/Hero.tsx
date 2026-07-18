@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import { journey } from "../lib/progressStore";
+import { useI18n } from "../i18n";
 
 export function Hero() {
+  const { t } = useI18n();
   const [index, setIndex] = useState(0);
 
   useEffect(() => journey.subscribe((s) => setIndex(s.index)), []);
@@ -9,26 +11,29 @@ export function Hero() {
   return (
     <section id="hero" className="hero">
       <div className="hero__inner">
-        <p className="hx-kicker hero__kicker hx-reveal">The HorizonX Ecosystem</p>
+        <p className="hx-kicker hero__kicker hx-reveal">{t.hero.kicker}</p>
         <h1 className="hero__title hx-reveal" data-delay="0.1">
-          Every business begins
+          {t.hero.titleA}
           <br />
-          at <span className="hero__zero">zero</span>.
+          {t.hero.titleZeroPrefix}
+          <span className="hero__zero">{t.hero.titleZero}</span>
+          {t.hero.titleZeroSuffix}
         </h1>
         <p className="hero__lead hx-reveal" data-delay="0.2">
-          HorizonX is an ecosystem of specialized AI-powered platforms that carries
-          any business from <strong>0% to 100% digitalization</strong> — one stage at a time.
+          {t.hero.lead1}
+          <strong>{t.hero.leadStrong}</strong>
+          {t.hero.lead2}
         </p>
       </div>
 
       <div className="hero__sphere-label" aria-live="polite">
-        <span className="hero__sphere-kicker">Digitalization Index</span>
+        <span className="hero__sphere-kicker">{t.hero.sphereKicker}</span>
         <span className="hero__sphere-value">{String(index).padStart(2, "0")}%</span>
       </div>
 
       <div className="hero__scroll">
         <span className="hero__scroll-line" />
-        <span>Scroll to begin the journey</span>
+        <span>{t.hero.scrollHint}</span>
       </div>
     </section>
   );

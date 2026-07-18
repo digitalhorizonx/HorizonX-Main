@@ -1,9 +1,8 @@
 import { useMemo, useState } from "react";
 import { WORLDS, XVERSE_URL } from "../lib/worlds";
 import { EXTERNAL_LINK_REL } from "../lib/ecosystem";
+import { fmt, useI18n } from "../i18n";
 import {
-  ASSESSMENT_QUESTIONS,
-  SECTORS,
   computeAssessment,
   emptyAnswers,
   type AssessmentAnswers,
@@ -11,15 +10,16 @@ import {
 
 /**
  * The digitalization assessment — a rules-based, five-question evaluation.
- * All scoring and recommendation logic lives in src/lib/assessment.ts;
- * this component only presents it.
+ * Scoring lives in src/lib/assessment.ts; questions, reasons, impacts, and
+ * every label render from the active locale's dictionary.
  */
 export function Calculator() {
+  const { t } = useI18n();
   const [answers, setAnswers] = useState<AssessmentAnswers>(emptyAnswers);
   const [sectorId, setSectorId] = useState<string | null>(null);
 
   const result = useMemo(() => computeAssessment(answers), [answers]);
-  const sector = SECTORS.find((s) => s.id === sectorId) ?? null;
+  const sector = t.assessment.sectors.find((s) => s.id === sectorId) ?? null;
   const worldById = (id: string) => WORLDS.find((w) => w.id === id)!;
 
   const set = (id: string, value: boolean) =>
@@ -37,21 +37,21 @@ export function Calculator() {
     <section id="calculator" className="calc">
       <div className="hx-container">
         <div className="calc__head">
-          <p className="hx-kicker hx-reveal">Digitalization Assessment</p>
+          <p className="hx-kicker hx-reveal">{t.assessment.kicker}</p>
           <h2 className="calc__title hx-reveal" data-delay="0.08">
-            Where is <span className="calc__title-accent">your</span> business
-            on the index?
+            {t.assessment.titlePre}
+            <span className="calc__title-accent">{t.assessment.titleAccent}</span>
+            {t.assessment.titlePost}
           </h2>
           <p className="calc__lead hx-reveal" data-delay="0.16">
-            A five-question, rules-based assessment. Your score, your current
-            stage, and the platform built for your next step — instantly.
+            {t.assessment.lead}
           </p>
         </div>
 
-        <div className="calc__sectors hx-reveal" data-delay="0.18" role="group" aria-label="Your sector (optional)">
-          <span className="calc__sectors-label">Your sector · optional</span>
+        <div className="calc__sectors hx-reveal" data-delay="0.18" role="group" aria-label={t.assessment.sectorsLabel}>
+          <span className="calc__sectors-label">{t.assessment.sectorsLabel}</span>
           <div className="calc__sectors-chips">
-            {SECTORS.map((s) => (
+            {t.assessment.sectors.map((s) => (
               <button
                 key={s.id}
                 className={`calc__sector-chip ${sectorId === s.id ? "is-active" : ""}`}
@@ -66,30 +66,30 @@ export function Calculator() {
 
         <div className="calc__grid">
           <div className="calc__questions hx-glass hx-reveal" data-delay="0.2">
-            {ASSESSMENT_QUESTIONS.map((q, i) => (
+            {WORLDS.map((w, i) => (
               <div
-                key={q.id}
+                key={w.id}
                 className="calc-q"
-                style={{ ["--w-color" as string]: worldById(q.id).color }}
+                style={{ ["--w-color" as string]: w.color }}
               >
                 <div className="calc-q__text">
                   <span className="calc-q__num">{String(i + 1).padStart(2, "0")}</span>
-                  <span>{q.text}</span>
+                  <span>{t.worlds[w.id].question}</span>
                 </div>
-                <div className="calc-q__toggle" role="group" aria-label={q.text}>
+                <div className="calc-q__toggle" role="group" aria-label={t.worlds[w.id].question}>
                   <button
-                    className={answers[q.id] === true ? "is-active" : ""}
-                    onClick={() => set(q.id, true)}
-                    aria-pressed={answers[q.id] === true}
+                    className={answers[w.id] === true ? "is-active" : ""}
+                    onClick={() => set(w.id, true)}
+                    aria-pressed={answers[w.id] === true}
                   >
-                    Yes
+                    {t.assessment.yes}
                   </button>
                   <button
-                    className={answers[q.id] === false ? "is-active is-no" : ""}
-                    onClick={() => set(q.id, false)}
-                    aria-pressed={answers[q.id] === false}
+                    className={answers[w.id] === false ? "is-active is-no" : ""}
+                    onClick={() => set(w.id, false)}
+                    aria-pressed={answers[w.id] === false}
                   >
-                    Not yet
+                    {t.assessment.notYet}
                   </button>
                 </div>
               </div>
@@ -104,7 +104,7 @@ export function Calculator() {
             }}
             aria-live="polite"
           >
-            <span className="calc__result-kicker">Your Digitalization Index</span>
+            <span className="calc__result-kicker">{t.assessment.resultKicker}</span>
             <div className="calc__score">
               <span className="calc__score-value" data-testid="assessment-score">
                 {result.complete ? result.score : "--"}
@@ -120,7 +120,7 @@ export function Calculator() {
                 <span
                   key={w.id}
                   className="calc__meter-tick"
-                  style={{ left: `${w.index}%` }}
+                  style={{ ["--tick-pos" as string]: `${w.index}%` }}
                 />
               ))}
             </div>
@@ -128,31 +128,33 @@ export function Calculator() {
             {result.complete ? (
               <div className="calc__verdict">
                 <div className="calc__verdict-row">
-                  <span>Current stage</span>
-                  <strong data-testid="assessment-stage">{result.stageLabel}</strong>
+                  <span>{t.assessment.currentStage}</span>
+                  <strong data-testid="assessment-stage">
+                    {t.assessment.stages[result.stageKey]}
+                  </strong>
                 </div>
                 {rec ? (
                   <>
                     <div className="calc__verdict-row">
-                      <span>Recommended next step</span>
+                      <span>{t.assessment.recommendedNext}</span>
                       <strong style={{ color: rec.product.color }} data-testid="assessment-next">
-                        {rec.product.name} — {rec.product.tagline}
+                        {rec.product.name} — {t.worlds[rec.product.id].tagline}
                       </strong>
                     </div>
                     <div className="calc__verdict-row">
-                      <span>Why this step</span>
+                      <span>{t.assessment.whyThisStep}</span>
                       <strong className="calc__verdict-reason">
-                        {rec.reason}
+                        {t.assessment.reasons[rec.product.id]}
                         {sector?.note ? ` ${sector.note}` : ""}
                       </strong>
                     </div>
                     <div className="calc__verdict-row">
-                      <span>Expected impact</span>
-                      <strong>{rec.impact}</strong>
+                      <span>{t.assessment.expectedImpact}</span>
+                      <strong>{t.assessment.impacts[rec.product.id]}</strong>
                     </div>
                     <div className="calc__verdict-row">
-                      <span>Takes you to</span>
-                      <strong>{rec.reachesIndex}% digitalized</strong>
+                      <span>{t.assessment.takesYouTo}</span>
+                      <strong>{fmt(t.assessment.digitalized, { pct: rec.reachesIndex })}</strong>
                     </div>
                     <div className="calc__actions">
                       <a
@@ -161,7 +163,8 @@ export function Calculator() {
                         target="_blank"
                         rel={EXTERNAL_LINK_REL}
                       >
-                        Continue with {rec.product.name} <span className="hx-btn__arrow">→</span>
+                        {fmt(t.assessment.continueWith, { name: rec.product.name })}{" "}
+                        <span className="hx-btn__arrow">→</span>
                       </a>
                       <a
                         className="hx-btn hx-btn--ghost"
@@ -169,23 +172,20 @@ export function Calculator() {
                         target="_blank"
                         rel={EXTERNAL_LINK_REL}
                       >
-                        See examples in XVerse
+                        {t.assessment.seeExamples}
                       </a>
                       <button className="hx-btn hx-btn--ghost" onClick={reset}>
-                        Start over
+                        {t.assessment.startOver}
                       </button>
                     </div>
                   </>
                 ) : (
                   <>
                     <div className="calc__verdict-row">
-                      <span>Status</span>
-                      <strong>Fully digitalized — 100%</strong>
+                      <span>{t.assessment.statusLabel}</span>
+                      <strong>{t.assessment.fullyDigitalized}</strong>
                     </div>
-                    <p className="calc__verdict-note">
-                      You operate at the frontier. Explore what a connected
-                      intelligence layer adds on top.
-                    </p>
+                    <p className="calc__verdict-note">{t.assessment.frontierNote}</p>
                     <div className="calc__actions">
                       <a
                         className="hx-btn hx-btn--primary"
@@ -193,10 +193,10 @@ export function Calculator() {
                         target="_blank"
                         rel={EXTERNAL_LINK_REL}
                       >
-                        Explore XVerse <span className="hx-btn__arrow">→</span>
+                        {t.assessment.exploreXverse} <span className="hx-btn__arrow">→</span>
                       </a>
                       <button className="hx-btn hx-btn--ghost" onClick={reset}>
-                        Start over
+                        {t.assessment.startOver}
                       </button>
                     </div>
                   </>
@@ -204,8 +204,9 @@ export function Calculator() {
               </div>
             ) : (
               <p className="calc__hint">
-                Answer {remaining} more question{remaining === 1 ? "" : "s"} to
-                reveal your score and next step.
+                {fmt(remaining === 1 ? t.assessment.hintOne : t.assessment.hintOther, {
+                  n: remaining,
+                })}
               </p>
             )}
           </div>

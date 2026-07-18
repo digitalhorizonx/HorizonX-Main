@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { journey } from "../lib/progressStore";
 import { WORLDS } from "../lib/worlds";
+import { useI18n } from "../i18n";
 
 const SIZE = 560;
 const CENTER = SIZE / 2;
@@ -35,6 +36,7 @@ interface Sector {
 }
 
 export function IndexDial() {
+  const { t, href } = useI18n();
   const [index, setIndex] = useState(0);
   const [world, setWorld] = useState(-1);
   const [hovered, setHovered] = useState<string | null>(null);
@@ -72,42 +74,34 @@ export function IndexDial() {
   return (
     <section id="index" className="dial-section">
       <div className="hx-container dial-section__head">
-        <p className="hx-kicker hx-reveal">The Digitalization Index</p>
+        <p className="hx-kicker hx-reveal">{t.dial.kicker}</p>
         <h2 className="dial-section__title hx-reveal" data-delay="0.08">
-          One index. Five stages.
+          {t.dial.titleA}
           <br />
-          Your entire transformation.
+          {t.dial.titleB}
         </h2>
         <p className="dial-section__lead hx-reveal" data-delay="0.16">
-          Every HorizonX platform advances your business one stage further.
-          Explore a sector to enter its world.
+          {t.dial.lead}
         </p>
       </div>
 
       <div className="dial hx-reveal" data-delay="0.2">
-        <svg
-          viewBox={`0 0 ${SIZE} ${SIZE}`}
-          className="dial__svg"
-          role="img"
-          aria-label="Digitalization Index — five stages: Xability 30%, XSite 60%, XApps 80%, XAuto 90%, XAI 100%"
-        >
-          {/* dormant track */}
+        <svg viewBox={`0 0 ${SIZE} ${SIZE}`} className="dial__svg" role="img" aria-label={t.dial.ariaLabel}>
           {sectors.map((s) => (
             <path
               key={`track-${s.id}`}
               d={s.path}
               fill="none"
-              stroke="rgba(255,255,255,0.07)"
+              stroke="var(--hx-dial-track)"
               strokeWidth={STROKE}
               strokeLinecap="round"
             />
           ))}
-          {/* lit sectors */}
           {sectors.map((s, i) => {
             const lit = world >= i;
             const hover = hovered === s.id;
             return (
-              <a key={s.id} href={`#${s.id}`} aria-label={`${s.name} — reach ${s.index}%`}>
+              <a key={s.id} href={href(`/#${s.id}`)} aria-label={`${s.name} — ${s.index}%`}>
                 <path
                   d={s.path}
                   fill="none"
@@ -129,7 +123,6 @@ export function IndexDial() {
               </a>
             );
           })}
-          {/* sector labels */}
           {sectors.map((s) => (
             <text
               key={`label-${s.id}`}
@@ -138,7 +131,7 @@ export function IndexDial() {
               textAnchor="middle"
               dominantBaseline="middle"
               className={`dial__label ${hovered === s.id ? "is-hover" : ""}`}
-              fill={hovered === s.id ? s.color : "rgba(230,233,255,0.55)"}
+              fill={hovered === s.id ? s.color : "var(--hx-dial-label)"}
             >
               <tspan x={s.labelPos.x} dy="-0.4em" className="dial__label-name">
                 {s.name}
@@ -151,12 +144,12 @@ export function IndexDial() {
         </svg>
 
         <div className="dial__center">
-          <span className="dial__center-kicker">Digitalization Index</span>
+          <span className="dial__center-kicker">{t.dial.centerKicker}</span>
           <span className="dial__center-value">{String(index).padStart(2, "0")}%</span>
           <span className="dial__center-hint">
             {hovered
-              ? WORLDS.find((w) => w.id === hovered)?.tagline
-              : "Click a sector to enter its world"}
+              ? t.worlds[hovered as keyof typeof t.worlds].tagline
+              : t.dial.centerHint}
           </span>
         </div>
       </div>

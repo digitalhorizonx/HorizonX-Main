@@ -3,9 +3,13 @@ import { journey } from "../lib/progressStore";
 import { WORLDS } from "../lib/worlds";
 import { EXTERNAL_LINK_REL, FLAGSHIP, XVERSE } from "../lib/ecosystem";
 import { useRoute } from "../lib/router";
+import { useI18n, splitLocalePath } from "../i18n";
 import { Logo } from "./Logo";
+import { LanguageSelector } from "./LanguageSelector";
+import { ThemeToggle } from "./ThemeToggle";
 
 export function Nav() {
+  const { t, href } = useI18n();
   const [index, setIndex] = useState(0);
   const [world, setWorld] = useState(-1);
   const [open, setOpen] = useState(false);
@@ -30,19 +34,19 @@ export function Nav() {
 
   const accent = world >= 0 ? WORLDS[world].color : "#5a5e8a";
   const close = () => setOpen(false);
-  const onHome = useRoute() === FLAGSHIP.routes.home;
+  const onHome = splitLocalePath(useRoute()).path === FLAGSHIP.routes.home;
 
   return (
     <header className="nav">
-      <a href="/#hero" className="nav__brand" aria-label="HorizonX — back to start">
+      <a href={href("/#hero")} className="nav__brand" aria-label={t.nav.backToStart}>
         <Logo />
       </a>
 
-      <nav className={`nav__links ${open ? "is-open" : ""}`} aria-label="Main navigation">
+      <nav className={`nav__links ${open ? "is-open" : ""}`} aria-label={t.nav.mainNav}>
         {WORLDS.map((w) => (
           <a
             key={w.id}
-            href={`/#${w.id}`}
+            href={href(`/#${w.id}`)}
             className="nav__link"
             style={{ ["--w-color" as string]: w.color }}
             onClick={close}
@@ -52,7 +56,7 @@ export function Nav() {
           </a>
         ))}
         <span className="nav__divider" aria-hidden />
-        <a href={FLAGSHIP.routes.xbrain} className="nav__link" onClick={close}>
+        <a href={href(FLAGSHIP.routes.xbrain)} className="nav__link" onClick={close}>
           XBrain
         </a>
         <a
@@ -64,24 +68,32 @@ export function Nav() {
         >
           XVerse
         </a>
-        <a href={FLAGSHIP.routes.investors} className="nav__link" onClick={close}>
-          Investors
+        <a href={href(FLAGSHIP.routes.investors)} className="nav__link" onClick={close}>
+          {t.investors.kicker}
         </a>
-        <a href="/#calculator" className="nav__link nav__link--cta" onClick={close}>
-          Your Index
+        <a href={href("/#calculator")} className="nav__link nav__link--cta" onClick={close}>
+          {t.nav.yourIndex}
         </a>
+        <div className="nav__mobile-controls">
+          <LanguageSelector />
+          <ThemeToggle />
+        </div>
       </nav>
 
       <div className="nav__meta">
         {onHome && (
           <div className="nav__index" style={{ ["--accent" as string]: accent }}>
-            <span className="nav__index-label">Index</span>
+            <span className="nav__index-label">{t.nav.indexLabel}</span>
             <span className="nav__index-value">{String(index).padStart(2, "0")}%</span>
           </div>
         )}
+        <div className="nav__desktop-controls">
+          <LanguageSelector />
+          <ThemeToggle />
+        </div>
         <button
           className={`nav__burger ${open ? "is-open" : ""}`}
-          aria-label="Menu"
+          aria-label={t.nav.menu}
           aria-expanded={open}
           onClick={() => setOpen(!open)}
         >

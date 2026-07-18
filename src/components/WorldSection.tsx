@@ -1,13 +1,18 @@
 import { useRef } from "react";
 import type { World } from "../lib/worlds";
 import { EXTERNAL_LINK_REL } from "../lib/ecosystem";
+import { fmt, useI18n } from "../i18n";
 import { Vignette } from "./vignettes";
 
 /**
  * One stage of the journey. The visitor "arrives" at a world:
  * stage number, narrative, living vignette with pointer-reactive tilt.
+ * All narrative copy is localized; brand names, colors, weights, and URLs
+ * come from the world model.
  */
 export function WorldSection({ world, order }: { world: World; order: number }) {
+  const { t } = useI18n();
+  const copy = t.worlds[world.id];
   const stageRef = useRef<HTMLDivElement>(null);
 
   const onMove = (e: React.MouseEvent) => {
@@ -41,7 +46,7 @@ export function WorldSection({ world, order }: { world: World; order: number }) 
       <div className="hx-container world__grid">
         <div className="world__copy">
           <p className="hx-kicker world__kicker hx-reveal">
-            World {String(order + 1).padStart(2, "0")} · Stage {world.index}%
+            {fmt(t.worldUi.kicker, { n: String(order + 1).padStart(2, "0"), pct: world.index })}
           </p>
           <span className="world__index hx-reveal" data-delay="0.05" aria-hidden>
             {world.index}
@@ -49,19 +54,24 @@ export function WorldSection({ world, order }: { world: World; order: number }) 
           </span>
           <h2 className="world__name hx-reveal" data-delay="0.1">
             {world.name}
+            <span className="world__weight" aria-hidden>+{world.weight}%</span>
           </h2>
           <p className="world__tagline hx-reveal" data-delay="0.15">
-            {world.tagline}
+            {copy.tagline}
           </p>
           <p className="world__role hx-reveal" data-delay="0.18">
-            {world.role}
+            {copy.role}
           </p>
           <p className="world__narrative hx-reveal" data-delay="0.2">
-            {world.narrative}
+            {copy.narrative}
+          </p>
+          <p className="world__outcome hx-reveal" data-delay="0.22">
+            <span className="world__outcome-label">{t.worldUi.outcomeLabel}</span>
+            {copy.outcome}
           </p>
           <ul className="world__themes hx-reveal" data-delay="0.25">
-            {world.themes.map((t) => (
-              <li key={t}>{t}</li>
+            {copy.themes.map((theme) => (
+              <li key={theme}>{theme}</li>
             ))}
           </ul>
           <div className="world__actions hx-reveal" data-delay="0.3">
@@ -72,7 +82,8 @@ export function WorldSection({ world, order }: { world: World; order: number }) 
               target="_blank"
               rel={EXTERNAL_LINK_REL}
             >
-              Visit {world.name} <span className="hx-btn__arrow">→</span>
+              {fmt(t.worldUi.visit, { name: world.name })}{" "}
+              <span className="hx-btn__arrow">→</span>
             </a>
             <a
               className="hx-btn hx-btn--ghost"
@@ -80,7 +91,7 @@ export function WorldSection({ world, order }: { world: World; order: number }) 
               target="_blank"
               rel={EXTERNAL_LINK_REL}
             >
-              Explore in XVerse
+              {t.worldUi.exploreXverse}
             </a>
           </div>
         </div>

@@ -1,28 +1,30 @@
+import { useI18n } from "../i18n";
+
 /**
  * The core business problem — why the network exists.
  * Kept intentionally short: this is a beat in the journey, not a brochure.
  */
 export function Problem() {
+  const { t } = useI18n();
+
   return (
     <section id="problem" className="problem" aria-labelledby="problem-title">
       <div className="hx-container problem__inner">
-        <p className="hx-kicker hx-reveal">The Problem</p>
+        <p className="hx-kicker hx-reveal">{t.problem.kicker}</p>
         <h2 id="problem-title" className="problem__title hx-reveal" data-delay="0.08">
-          Growing businesses run on
+          {t.problem.titleA}
           <br />
-          <span className="problem__title-dim">disconnected pieces.</span>
+          <span className="problem__title-dim">{t.problem.titleB}</span>
         </h2>
         <ul className="problem__list hx-reveal" data-delay="0.16">
-          <li>Marketing tools that don't talk to the website</li>
-          <li>Websites separate from operations</li>
-          <li>Apps isolated from customer data</li>
-          <li>Workflows moved by hand, twice</li>
-          <li>No unified strategy, no central intelligence</li>
-          <li>No measurable path from activity to outcomes</li>
+          {t.problem.items.map((item) => (
+            <li key={item}>{item}</li>
+          ))}
         </ul>
         <p className="problem__resolution hx-reveal" data-delay="0.24">
-          HorizonX connects <strong>data → decisions → products → execution → outcomes</strong>{" "}
-          in one digitalization intelligence network.
+          {t.problem.resolutionPre}
+          <strong>{t.problem.resolutionChain}</strong>
+          {t.problem.resolutionPost}
         </p>
       </div>
     </section>

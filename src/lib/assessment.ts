@@ -50,11 +50,21 @@ export interface AssessmentRecommendation {
   reachesIndex: number;
 }
 
+export type StageKey =
+  | "offline"
+  | "present"
+  | "connected"
+  | "operational"
+  | "automated"
+  | "intelligent";
+
 export interface AssessmentResult {
   /** 0–100, always a multiple of the stage weights */
   score: number;
-  /** the stage band the business currently sits in */
+  /** the stage band the business currently sits in (English label) */
   stageLabel: string;
+  /** locale-independent stage identifier for localized display */
+  stageKey: StageKey;
   complete: boolean;
   answeredCount: number;
   recommendation: AssessmentRecommendation | null;
@@ -117,14 +127,23 @@ const RECOMMENDATION_DETAIL: Record<ProductId, { reason: string; impact: ImpactC
   },
 };
 
-function stageLabelFor(score: number): string {
-  if (score <= 0) return "Offline";
-  if (score < 60) return "Present";
-  if (score < 80) return "Connected";
-  if (score < 90) return "Operational";
-  if (score < 100) return "Automated";
-  return "Intelligent";
+function stageKeyFor(score: number): StageKey {
+  if (score <= 0) return "offline";
+  if (score < 60) return "present";
+  if (score < 80) return "connected";
+  if (score < 90) return "operational";
+  if (score < 100) return "automated";
+  return "intelligent";
 }
+
+const STAGE_LABELS_EN: Record<StageKey, string> = {
+  offline: "Offline",
+  present: "Present",
+  connected: "Connected",
+  operational: "Operational",
+  automated: "Automated",
+  intelligent: "Intelligent",
+};
 
 /**
  * Deterministic scoring: sum of covered stage weights; recommendation is the
@@ -150,9 +169,11 @@ export function computeAssessment(answers: AssessmentAnswers): AssessmentResult 
       }
     : null;
 
+  const stageKey = stageKeyFor(score);
   return {
     score: Math.min(100, Math.max(0, score)),
-    stageLabel: stageLabelFor(score),
+    stageLabel: STAGE_LABELS_EN[stageKey],
+    stageKey,
     complete,
     answeredCount,
     recommendation,
