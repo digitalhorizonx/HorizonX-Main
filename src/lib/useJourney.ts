@@ -68,19 +68,24 @@ export function useJourney(ready: boolean) {
       )
     );
 
-    // Smooth anchor navigation through Lenis. Handles both "#id" and
-    // same-page "/#id" links (the router owns cross-page navigation).
+    // Smooth anchor navigation through Lenis. Handles "#id" and same-page
+    // "/path#id" links in any locale (the router owns cross-page navigation).
     const onAnchor = (e: Event) => {
-      const anchor = (e.target as HTMLElement).closest<HTMLAnchorElement>(
-        "a[href^='#'], a[href^='/#']"
-      );
+      const anchor = (e.target as HTMLElement).closest<HTMLAnchorElement>("a[href*='#']");
       if (!anchor) return;
-      const hash = anchor.getAttribute("href")!.split("#")[1];
+      const href = anchor.getAttribute("href")!;
+      const [pathPart, hash] = href.split("#");
       if (!hash) return;
-      const target = document.getElementById(hash);
-      if (!target) return;
+      // only intercept when the link targets the CURRENT page's anchors
+      if (pathPart && pathPart !== "" ) {
+        const current = window.location.pathname.replace(/\/$/, "") || "/";
+        const target = pathPart.replace(/\/$/, "") || "/";
+        if (target !== current) return;
+      }
+      const el = document.getElementById(hash);
+      if (!el) return;
       e.preventDefault();
-      lenis.scrollTo(target, { offset: 0, duration: 1.6 });
+      lenis.scrollTo(el, { offset: 0, duration: 1.6 });
     };
     document.addEventListener("click", onAnchor);
 

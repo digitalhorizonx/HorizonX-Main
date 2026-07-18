@@ -22,8 +22,35 @@ export function normalizePath(p: string): string {
   return p.length > 1 && p.endsWith("/") ? p.slice(0, -1) : p;
 }
 
+/**
+ * Programmatic SPA navigation. Pushes history state and notifies the Router
+ * via a synthetic popstate event, so any caller (e.g. the language selector)
+ * can navigate without new wiring.
+ */
+export function navigate(path: string) {
+  window.history.pushState(null, "", path);
+  window.dispatchEvent(new PopStateEvent("popstate"));
+  window.scrollTo(0, 0);
+}
+
 export function Router({ children }: { children: ReactNode }) {
   const [path, setPath] = useState(() => normalizePath(window.location.pathname));
+
+  // Sticky language preference: an explicit earlier choice re-applies when
+  // the visitor lands on the bare root. Exact "/" only — deep links, crawler
+  // requests, and every other path are never rewritten.
+  useEffect(() => {
+    if (window.location.pathname !== "/") return;
+    // avoid a static import cycle with the i18n module
+    import("../i18n").then(({ readStoredLocale, localePath }) => {
+      const stored = readStoredLocale();
+      if (stored && stored !== "en" && window.location.pathname === "/") {
+        const target = localePath(stored, "/");
+        window.history.replaceState(null, "", target);
+        setPath(normalizePath(target));
+      }
+    });
+  }, []);
 
   useEffect(() => {
     const onPop = () => setPath(normalizePath(window.location.pathname));
