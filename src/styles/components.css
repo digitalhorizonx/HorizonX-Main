@@ -630,8 +630,16 @@
   color: var(--w-color);
 }
 
+.world__role {
+  margin-top: var(--hx-s4);
+  font-family: var(--hx-font-display);
+  font-weight: 500;
+  color: var(--hx-ink);
+  max-width: 480px;
+}
+
 .world__narrative {
-  margin-top: var(--hx-s5);
+  margin-top: var(--hx-s3);
   color: var(--hx-ink-dim);
   max-width: 480px;
 }

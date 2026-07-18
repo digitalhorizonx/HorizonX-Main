@@ -1,5 +1,6 @@
 import { useRef } from "react";
 import type { World } from "../lib/worlds";
+import { EXTERNAL_LINK_REL } from "../lib/ecosystem";
 import { Vignette } from "./vignettes";
 
 /**
@@ -52,6 +53,9 @@ export function WorldSection({ world, order }: { world: World; order: number }) 
           <p className="world__tagline hx-reveal" data-delay="0.15">
             {world.tagline}
           </p>
+          <p className="world__role hx-reveal" data-delay="0.18">
+            {world.role}
+          </p>
           <p className="world__narrative hx-reveal" data-delay="0.2">
             {world.narrative}
           </p>
@@ -66,12 +70,17 @@ export function WorldSection({ world, order }: { world: World; order: number }) 
               style={{ ["--btn-glow" as string]: world.color }}
               href={world.url}
               target="_blank"
-              rel="noreferrer"
+              rel={EXTERNAL_LINK_REL}
             >
-              Explore Platform <span className="hx-btn__arrow">→</span>
+              Visit {world.name} <span className="hx-btn__arrow">→</span>
             </a>
-            <a className="hx-btn hx-btn--ghost" href={world.demoUrl} target="_blank" rel="noreferrer">
-              {order === 0 ? "Visit XVerse Demo" : "View Live Demo"}
+            <a
+              className="hx-btn hx-btn--ghost"
+              href={world.demoUrl}
+              target="_blank"
+              rel={EXTERNAL_LINK_REL}
+            >
+              Explore in XVerse
             </a>
           </div>
         </div>
