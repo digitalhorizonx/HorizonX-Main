@@ -1,0 +1,68 @@
+# HorizonX Flagship — Launch Checklist
+
+Work through every item before announcing. Items marked **[manual]** cannot
+be verified from the repository's build environment and require a human with
+production access.
+
+## Repository & branch
+- [ ] On `claude/horizonx-flagship-experience-asykek` (the default branch), clean tree, synced with origin
+- [ ] `git log` shows the expected milestone commits; no unexplained changes
+
+## Build & CI
+- [ ] `npm ci && npm run build` succeeds locally
+- [ ] Latest "Validate and Deploy" workflow run is green (validate **and** deploy jobs)
+- [ ] No skipped validation steps in the workflow logs
+
+## Automated tests
+- [ ] `npm run test:e2e` passes (63 tests: journey, routes, assessment, links, responsive, a11y basics)
+- [ ] No new console errors or first-party request failures in test output
+
+## Experience — per device class
+- [ ] Desktop 1440px: journey, dial, worlds, XBrain, assessment, XVerse OK
+- [ ] Tablet 768px: no horizontal overflow, nav burger works
+- [ ] Mobile 390px: same, plus touch targets comfortable
+- [ ] **[manual]** Safari (macOS): WebGL sphere, backdrop-filter glass, fonts
+- [ ] **[manual]** iOS Safari: scroll journey, preloader, canvas performance
+- [ ] **[manual]** One low-powered Android device: acceptable frame rate; fallback acceptable if WebGL unavailable
+- [ ] Reduced motion (OS setting): content readable, navigation works, no preloader trap
+- [ ] Keyboard-only pass: tab order sane, focus visible, menu closes on Escape
+
+## Routes
+- [ ] `/`, `/xbrain`, `/investors` load directly (refresh included) on production
+- [ ] Unknown path shows branded 404 with working "Return to the journey"
+- [ ] **[manual]** `https://horizonx.site/investors` direct hit returns the app via 404.html fallback (GitHub Pages)
+
+## SEO & metadata
+- [ ] `robots.txt` and `sitemap.xml` reachable on production
+- [ ] Canonical URLs point at `https://horizonx.site`
+- [ ] OG/Twitter cards preview correctly (use a card validator) — image renders
+- [ ] **[manual]** Replace temporary `og-image.png` with final branded artwork before the definitive campaign
+- [ ] Favicons: SVG + 32px PNG + apple-touch-icon appear in browsers/devices
+- [ ] Per-route titles/descriptions correct on `/`, `/xbrain`, `/investors`
+
+## Domain, DNS, HTTPS
+- [ ] **[manual]** GitHub Pages: Settings → Pages → Deploy from branch → `gh-pages` / root
+- [ ] **[manual]** Custom domain `horizonx.site` set and verified in Pages settings
+- [ ] **[manual]** DNS: four apex A records → 185.199.108–111.153 (+ optional `www` CNAME → `digitalhorizonx.github.io`)
+- [ ] **[manual]** "Enforce HTTPS" enabled after certificate issuance
+- [ ] **[manual]** `http://` and `www` variants redirect correctly
+
+## Ecosystem links
+- [ ] **[manual]** `xability.horizonx.site`, `xverse.horizonx.site` reachable (stated live; never network-verified from the build sandbox)
+- [ ] **[manual]** Confirm status of XSite/XApps/XAuto/XAI landing pages; if any are not live, decide on availability states (see docs/ECOSYSTEM_ARCHITECTURE.md)
+- [ ] **[manual]** Confirm whether XVerse product-specific routes exist before switching `xverseUrl` to them
+- [ ] Temporary tool domain (`claude.horizonx.site`) appears nowhere in UI (test-enforced)
+
+## Investor gateway
+- [ ] **[manual]** Confirm the investor-contact destination (currently mailto → digital.horizonx.tek@gmail.com); swap in `src/lib/ecosystem.ts` if a form/data room exists
+- [ ] Traction section shows the data-room state — no invented numbers
+- [ ] Milestone statuses reviewed by the founder for accuracy
+
+## Analytics & monitoring
+- [ ] **[manual]** Decide on analytics (none installed); if added, update the CSP meta tag accordingly and re-run the suite
+
+## Security posture
+- [ ] CSP meta tag present; site verified working under it
+- [ ] No secrets/credentials in the repository (frontend-only)
+- [ ] External links carry `noopener noreferrer` (test-enforced)
+- [ ] Known limitation acknowledged: GitHub Pages cannot set server HTTP headers (HSTS, frame-ancestors, etc.) — documented in README
