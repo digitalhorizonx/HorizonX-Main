@@ -1,45 +1,43 @@
-import { useCallback, useState } from "react";
-import { Scene } from "./three/Scene";
-import { useJourney } from "./lib/useJourney";
-import { WORLDS } from "./lib/worlds";
-import { Preloader } from "./components/Preloader";
+import { Router, useRoute } from "./lib/router";
+import { FLAGSHIP } from "./lib/ecosystem";
 import { Nav } from "./components/Nav";
-import { ProgressRail } from "./components/ProgressRail";
-import { Hero } from "./components/Hero";
-import { Problem } from "./components/Problem";
-import { IndexDial } from "./components/IndexDial";
-import { WorldSection } from "./components/WorldSection";
-import { XBrainSection } from "./components/XBrainSection";
-import { Calculator } from "./components/Calculator";
-import { XVerse } from "./components/XVerse";
 import { Footer } from "./components/Footer";
+import { HomePage } from "./pages/HomePage";
+import { InvestorsPage } from "./pages/InvestorsPage";
+import { XBrainPage } from "./pages/XBrainPage";
+import { NotFoundPage } from "./pages/NotFoundPage";
 
-export default function App() {
-  const [ready, setReady] = useState(false);
-  const onPreloaderDone = useCallback(() => setReady(true), []);
+function Shell() {
+  const path = useRoute();
 
-  useJourney(ready);
+  let page: JSX.Element;
+  switch (path) {
+    case FLAGSHIP.routes.home:
+      page = <HomePage />;
+      break;
+    case FLAGSHIP.routes.investors:
+      page = <InvestorsPage />;
+      break;
+    case FLAGSHIP.routes.xbrain:
+      page = <XBrainPage />;
+      break;
+    default:
+      page = <NotFoundPage />;
+  }
 
   return (
     <>
-      <Preloader onDone={onPreloaderDone} />
-      <Scene />
       <Nav />
-      <ProgressRail />
-      <main className="page">
-        <Hero />
-        <Problem />
-        <IndexDial />
-        <div id="journey">
-          {WORLDS.map((world, i) => (
-            <WorldSection key={world.id} world={world} order={i} />
-          ))}
-        </div>
-        <XBrainSection />
-        <Calculator />
-        <XVerse />
-      </main>
+      {page}
       <Footer />
     </>
+  );
+}
+
+export default function App() {
+  return (
+    <Router>
+      <Shell />
+    </Router>
   );
 }

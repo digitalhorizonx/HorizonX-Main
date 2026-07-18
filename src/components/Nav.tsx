@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { journey } from "../lib/progressStore";
 import { WORLDS } from "../lib/worlds";
 import { EXTERNAL_LINK_REL, FLAGSHIP, XVERSE } from "../lib/ecosystem";
+import { useRoute } from "../lib/router";
 import { Logo } from "./Logo";
 
 export function Nav() {
@@ -29,6 +30,7 @@ export function Nav() {
 
   const accent = world >= 0 ? WORLDS[world].color : "#5a5e8a";
   const close = () => setOpen(false);
+  const onHome = useRoute() === FLAGSHIP.routes.home;
 
   return (
     <header className="nav">
@@ -71,10 +73,12 @@ export function Nav() {
       </nav>
 
       <div className="nav__meta">
-        <div className="nav__index" style={{ ["--accent" as string]: accent }}>
-          <span className="nav__index-label">Index</span>
-          <span className="nav__index-value">{String(index).padStart(2, "0")}%</span>
-        </div>
+        {onHome && (
+          <div className="nav__index" style={{ ["--accent" as string]: accent }}>
+            <span className="nav__index-label">Index</span>
+            <span className="nav__index-value">{String(index).padStart(2, "0")}%</span>
+          </div>
+        )}
         <button
           className={`nav__burger ${open ? "is-open" : ""}`}
           aria-label="Menu"
