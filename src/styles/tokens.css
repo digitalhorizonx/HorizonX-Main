@@ -45,6 +45,20 @@
     rgba(255, 255, 255, 0) 60%
   );
 
+  /* ---------- Semantic surfaces (theme-aware) ---------- */
+  --hx-menu-bg: rgba(10, 10, 22, 0.92);
+  --hx-overlay-bg: rgba(3, 3, 9, 0.96);
+  --hx-nav-fade: linear-gradient(to bottom, rgba(3, 3, 9, 0.85), rgba(3, 3, 9, 0));
+  --hx-scrim: rgba(3, 3, 9, 0.72);
+  --hx-scrim-strong: rgba(3, 3, 9, 0.9);
+  --hx-btn-ghost-bg: rgba(3, 3, 9, 0.45);
+  --hx-dial-track: rgba(255, 255, 255, 0.07);
+  --hx-dial-label: rgba(230, 233, 255, 0.55);
+  --hx-scene-a: rgba(90, 94, 138, 0.22);
+  --hx-scene-b: rgba(124, 108, 255, 0.1);
+  --hx-scene-c: rgba(46, 168, 255, 0.07);
+  --hx-btn-primary-fg: #05050d;
+
   /* ---------- Elevation / lighting ---------- */
   --hx-shadow-1: 0 2px 12px rgba(0, 0, 0, 0.45);
   --hx-shadow-2: 0 12px 40px rgba(0, 0, 0, 0.55);
@@ -100,19 +114,58 @@
   --hx-dur-cinematic: 1400ms;
 }
 
-/* Light mode exists as a token layer for embedded product surfaces
-   (docs, calculator export). The flagship journey remains dark. */
+/* ============================================================
+   LIGHT THEME — a designed daylight counterpart, not an inversion.
+   Soft paper background, ink typography, the same five stage hues
+   (slightly deepened for contrast on light surfaces), shadows traded
+   for tinted ambience. Applied via data-theme set before first paint.
+   ============================================================ */
 [data-theme="light"] {
-  --hx-void: #f4f5fa;
+  color-scheme: light;
+
+  --hx-void: #f5f6fb;
   --hx-deep: #ffffff;
   --hx-surface: #ffffff;
-  --hx-line: rgba(10, 12, 40, 0.1);
-  --hx-line-strong: rgba(10, 12, 40, 0.2);
-  --hx-ink: #0b0d1f;
-  --hx-ink-dim: rgba(11, 13, 31, 0.65);
-  --hx-ink-faint: rgba(11, 13, 31, 0.4);
-  --hx-glass: rgba(255, 255, 255, 0.6);
-  --hx-glass-strong: rgba(255, 255, 255, 0.8);
+  --hx-line: rgba(11, 13, 31, 0.1);
+  --hx-line-strong: rgba(11, 13, 31, 0.2);
+
+  --hx-ink: #10122b;
+  --hx-ink-dim: rgba(16, 18, 43, 0.68);
+  --hx-ink-faint: rgba(16, 18, 43, 0.45);
+
+  /* stage colors deepened for AA contrast on light surfaces */
+  --hx-xability: #e63980;
+  --hx-xsite: #0d7fd8;
+  --hx-xapps: #5a48e8;
+  --hx-xauto: #c77d14;
+  --hx-xai: #0b9e77;
+
+  --hx-glass: rgba(255, 255, 255, 0.62);
+  --hx-glass-strong: rgba(255, 255, 255, 0.85);
+  --hx-glass-border: 1px solid rgba(11, 13, 31, 0.1);
+  --hx-glass-highlight: linear-gradient(
+    140deg,
+    rgba(255, 255, 255, 0.9) 0%,
+    rgba(255, 255, 255, 0.2) 32%,
+    rgba(255, 255, 255, 0) 60%
+  );
+
+  --hx-shadow-1: 0 2px 10px rgba(22, 26, 63, 0.08);
+  --hx-shadow-2: 0 12px 34px rgba(22, 26, 63, 0.12);
+  --hx-shadow-3: 0 28px 70px rgba(22, 26, 63, 0.16);
+
+  --hx-menu-bg: rgba(255, 255, 255, 0.94);
+  --hx-overlay-bg: rgba(245, 246, 251, 0.97);
+  --hx-nav-fade: linear-gradient(to bottom, rgba(245, 246, 251, 0.92), rgba(245, 246, 251, 0));
+  --hx-scrim: rgba(245, 246, 251, 0.7);
+  --hx-scrim-strong: rgba(245, 246, 251, 0.92);
+  --hx-btn-ghost-bg: rgba(255, 255, 255, 0.6);
+  --hx-dial-track: rgba(11, 13, 31, 0.08);
+  --hx-dial-label: rgba(16, 18, 43, 0.55);
+  --hx-scene-a: rgba(124, 108, 255, 0.1);
+  --hx-scene-b: rgba(46, 168, 255, 0.09);
+  --hx-scene-c: rgba(57, 214, 170, 0.08);
+  --hx-btn-primary-fg: #ffffff;
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -30,6 +30,8 @@ export default defineConfig({
   use: {
     baseURL: "http://localhost:4173",
     viewport: { width: 1440, height: 900 },
+    // the flagship journey is the dark experience; theme.spec.ts covers light
+    colorScheme: "dark",
     trace: "retain-on-failure",
     screenshot: "only-on-failure",
     launchOptions: {

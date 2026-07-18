@@ -1,4 +1,4 @@
-import { Component, Suspense, lazy, type ReactNode } from "react";
+import { Component, Suspense, lazy, useEffect, useState, type ReactNode } from "react";
 
 /**
  * Deferred entry point for the WebGL layer.
@@ -50,8 +50,31 @@ class SceneErrorBoundary extends Component<
   }
 }
 
+/** Tracks the resolved theme from the <html data-theme> attribute. */
+function useResolvedTheme(): "light" | "dark" {
+  const [theme, setTheme] = useState<"light" | "dark">(() =>
+    document.documentElement.dataset.theme === "light" ? "light" : "dark"
+  );
+
+  useEffect(() => {
+    const observer = new MutationObserver(() => {
+      setTheme(document.documentElement.dataset.theme === "light" ? "light" : "dark");
+    });
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+    return () => observer.disconnect();
+  }, []);
+
+  return theme;
+}
+
 export function SceneLoader() {
-  if (!webglAvailable()) {
+  const theme = useResolvedTheme();
+
+  // The particle journey is composited with additive blending — physically a
+  // dark-environment effect that washes out on light backgrounds. Light theme
+  // therefore renders the designed static atmosphere (theme-tinted tokens)
+  // instead of duplicating the 3D scene with a second shader path.
+  if (theme === "light" || !webglAvailable()) {
     return <SceneFallback />;
   }
   return (

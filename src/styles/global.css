@@ -137,7 +137,7 @@ canvas {
 
 .hx-btn--primary {
   background: var(--hx-ink);
-  color: #05050d;
+  color: var(--hx-btn-primary-fg);
 }
 
 .hx-btn--primary:hover {
@@ -159,14 +159,14 @@ canvas {
 .hx-btn--ghost {
   border: 1px solid var(--hx-line-strong);
   color: var(--hx-ink-dim);
-  background: rgba(3, 3, 9, 0.45);
+  background: var(--hx-btn-ghost-bg);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
 }
 
 .hx-btn--ghost:hover {
   color: var(--hx-ink);
-  border-color: rgba(255, 255, 255, 0.35);
+  border-color: var(--hx-ink-faint);
 }
 
 .hx-btn__arrow {
