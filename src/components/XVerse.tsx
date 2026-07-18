@@ -18,7 +18,7 @@ export function XVerse() {
           stage, running. See what 100% feels like before you begin.
         </p>
         <div className="xverse__actions hx-reveal" data-delay="0.24">
-          <a className="hx-btn hx-btn--primary" href={XVERSE_URL} target="_blank" rel="noreferrer">
+          <a className="hx-btn hx-btn--primary" href={XVERSE_URL} target="_blank" rel="noopener noreferrer">
             Launch XVerse <span className="hx-btn__arrow">→</span>
           </a>
           <a className="hx-btn hx-btn--ghost" href="#calculator">
@@ -33,7 +33,7 @@ export function XVerse() {
               className="xverse__node"
               href={w.url}
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
               style={{
                 ["--w-color" as string]: w.color,
                 ["--n" as string]: i,

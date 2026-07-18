@@ -411,6 +411,10 @@
 
 .xbnet__node {
   position: absolute;
+  /* clamp node centers away from the container edges so half-widths never
+     overflow the viewport on narrow screens */
+  left: clamp(64px, var(--x), calc(100% - 64px));
+  top: var(--y);
   transform: translate(-50%, -50%);
   display: flex;
   flex-direction: column;
@@ -944,6 +948,9 @@ a.xbnet__node:hover {
   display: flex;
   align-items: center;
   padding: var(--hx-s8) 0;
+  /* pointer-light field and orbit ornaments extend past the container;
+     clip at the full-width section so they never cause page overflow */
+  overflow: hidden;
 }
 
 .world::before {

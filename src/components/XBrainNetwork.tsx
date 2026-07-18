@@ -60,8 +60,8 @@ export function XBrainNetwork({ interactive = true }: { interactive?: boolean })
         const style = {
           ["--w-color" as string]: w.color,
           ["--n" as string]: i,
-          left: `${p.x}%`,
-          top: `${p.y}%`,
+          ["--x" as string]: `${p.x}%`,
+          ["--y" as string]: `${p.y}%`,
         };
         return interactive ? (
           <a key={w.id} className="xbnet__node" href={`/#${w.id}`} style={style}>

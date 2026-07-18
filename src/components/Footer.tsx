@@ -16,7 +16,7 @@ export function Footer() {
         <nav className="footer__col" aria-label="Platforms">
           <span className="footer__col-title">Platforms</span>
           {WORLDS.map((w) => (
-            <a key={w.id} href={w.url} target="_blank" rel="noreferrer">
+            <a key={w.id} href={w.url} target="_blank" rel="noopener noreferrer">
               {w.name}
               <em>{w.index}%</em>
             </a>
@@ -26,7 +26,7 @@ export function Footer() {
           <span className="footer__col-title">Experience</span>
           <a href="#index">The Index</a>
           <a href="#calculator">Calculator</a>
-          <a href={XVERSE_URL} target="_blank" rel="noreferrer">
+          <a href={XVERSE_URL} target="_blank" rel="noopener noreferrer">
             XVerse Demo
           </a>
         </nav>
