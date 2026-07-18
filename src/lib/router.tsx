@@ -80,7 +80,7 @@ export function Router({ children }: { children: ReactNode }) {
         // let the destination page mount before jumping to its anchor
         window.setTimeout(() => {
           document.querySelector(url.hash)?.scrollIntoView();
-        }, 60);
+        }, 60); // MOTION.anchorSettleMs — inlined to avoid an import cycle
       } else {
         window.scrollTo(0, 0);
       }

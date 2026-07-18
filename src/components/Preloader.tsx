@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { MOTION } from "../lib/motion";
 
 /**
  * The opening beat: complete darkness → the HorizonX mark condenses
@@ -14,12 +15,12 @@ export function Preloader({ onDone }: { onDone: () => void }) {
       setPhase("exit");
       return;
     }
-    const t1 = setTimeout(() => setPhase("logo"), 350);
-    const t2 = setTimeout(() => setPhase("pulse"), 1500);
+    const t1 = setTimeout(() => setPhase("logo"), MOTION.preloader.logoAtMs);
+    const t2 = setTimeout(() => setPhase("pulse"), MOTION.preloader.pulseAtMs);
     const t3 = setTimeout(() => {
       setPhase("exit");
       onDone();
-    }, 2450);
+    }, MOTION.preloader.doneAtMs);
     return () => {
       clearTimeout(t1);
       clearTimeout(t2);

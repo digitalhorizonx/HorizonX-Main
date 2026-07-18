@@ -3,6 +3,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Lenis from "lenis";
 import { journey } from "./progressStore";
+import { MOTION } from "./motion";
 import { WORLDS } from "./worlds";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -18,7 +19,7 @@ export function useJourney(ready: boolean) {
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     const lenis = new Lenis({
-      duration: 1.15,
+      duration: MOTION.scroll.lenisDuration,
       smoothWheel: !reducedMotion,
     });
 
@@ -53,16 +54,16 @@ export function useJourney(ready: boolean) {
     const revealTweens = reveals.map((el) =>
       gsap.fromTo(
         el,
-        { opacity: 0, y: 42 },
+        { opacity: 0, y: MOTION.reveal.distancePx },
         {
           opacity: 1,
           y: 0,
-          duration: reducedMotion ? 0 : 1.1,
-          ease: "expo.out",
+          duration: reducedMotion ? 0 : MOTION.reveal.duration,
+          ease: MOTION.reveal.ease,
           delay: parseFloat(el.dataset.delay ?? "0"),
           scrollTrigger: {
             trigger: el,
-            start: "top 88%",
+            start: MOTION.reveal.start,
           },
         }
       )
@@ -85,7 +86,7 @@ export function useJourney(ready: boolean) {
       const el = document.getElementById(hash);
       if (!el) return;
       e.preventDefault();
-      lenis.scrollTo(el, { offset: 0, duration: 1.6 });
+      lenis.scrollTo(el, { offset: 0, duration: MOTION.scroll.anchorDuration });
     };
     document.addEventListener("click", onAnchor);
 
