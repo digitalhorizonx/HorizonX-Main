@@ -7,6 +7,9 @@ import {
 } from "../lib/ecosystem";
 import { useI18n } from "../i18n";
 import { XBrainNetwork, XBrainNetworkList } from "../components/XBrainNetwork";
+import { JsonLd } from "../components/JsonLd";
+import { breadcrumbSchema, webPageSchema } from "../seo/schema";
+import { localePath } from "../i18n";
 
 /**
  * Public investor gateway. Frontend-only by design: there is no data room,
@@ -31,7 +34,8 @@ const MILESTONE_STATUS: MilestoneStatus[] = [
 ];
 
 export function InvestorsPage() {
-  const { t, href } = useI18n();
+  const { t, href, locale } = useI18n();
+  const url = FLAGSHIP.url + localePath(locale, FLAGSHIP.routes.investors);
 
   usePageMeta({
     title: t.meta.investors.title,
@@ -47,6 +51,11 @@ export function InvestorsPage() {
 
   return (
     <main className="subpage" id="investors">
+      <JsonLd data={webPageSchema({ title: t.meta.investors.title, description: t.meta.investors.description, url, locale })} />
+      <JsonLd data={breadcrumbSchema([
+        { name: "HorizonX", url: FLAGSHIP.url + localePath(locale, "/") },
+        { name: t.investors.kicker, url },
+      ])} />
       {/* ---------- Thesis ---------- */}
       <section className="subpage__hero">
         <div className="hx-container subpage__hero-inner">

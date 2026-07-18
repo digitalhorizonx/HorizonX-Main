@@ -1,0 +1,10 @@
+{
+  "origin": "https://horizonx.site",
+  "defaultLocale": "en",
+  "locales": ["en", "ar", "fr", "es", "de", "tr"],
+  "localizedRoutes": ["/", "/xbrain", "/investors"],
+  "englishOnlyRoutes": [
+    "/digital-transformation/restaurants",
+    "/digital-transformation/clinics"
+  ]
+}

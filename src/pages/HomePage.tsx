@@ -13,12 +13,14 @@ import { WorldSection } from "../components/WorldSection";
 import { XBrainSection } from "../components/XBrainSection";
 import { Calculator } from "../components/Calculator";
 import { XVerse } from "../components/XVerse";
+import { JsonLd } from "../components/JsonLd";
+import { organizationSchema, productNetworkSchema, webSiteSchema } from "../seo/schema";
 
 /** The opening beat plays once per session, not on every return to "/". */
 let preloaderPlayed = false;
 
 export function HomePage() {
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
   const [ready, setReady] = useState(preloaderPlayed);
   const onPreloaderDone = useCallback(() => {
     preloaderPlayed = true;
@@ -35,6 +37,9 @@ export function HomePage() {
 
   return (
     <>
+      <JsonLd data={organizationSchema()} />
+      <JsonLd data={webSiteSchema(locale, t)} />
+      <JsonLd data={productNetworkSchema(t)} />
       {!preloaderPlayed && <Preloader onDone={onPreloaderDone} />}
       <SceneLoader />
       <ProgressRail />

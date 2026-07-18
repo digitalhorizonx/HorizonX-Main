@@ -1,18 +1,194 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://horizonx.site/</loc>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://horizonx.site/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://horizonx.site/ar"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://horizonx.site/fr"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://horizonx.site/es"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://horizonx.site/de"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://horizonx.site/tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://horizonx.site/"/>
+  </url>
+  <url>
+    <loc>https://horizonx.site/ar</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://horizonx.site/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://horizonx.site/ar"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://horizonx.site/fr"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://horizonx.site/es"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://horizonx.site/de"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://horizonx.site/tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://horizonx.site/"/>
+  </url>
+  <url>
+    <loc>https://horizonx.site/fr</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://horizonx.site/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://horizonx.site/ar"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://horizonx.site/fr"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://horizonx.site/es"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://horizonx.site/de"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://horizonx.site/tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://horizonx.site/"/>
+  </url>
+  <url>
+    <loc>https://horizonx.site/es</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://horizonx.site/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://horizonx.site/ar"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://horizonx.site/fr"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://horizonx.site/es"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://horizonx.site/de"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://horizonx.site/tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://horizonx.site/"/>
+  </url>
+  <url>
+    <loc>https://horizonx.site/de</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://horizonx.site/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://horizonx.site/ar"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://horizonx.site/fr"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://horizonx.site/es"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://horizonx.site/de"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://horizonx.site/tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://horizonx.site/"/>
+  </url>
+  <url>
+    <loc>https://horizonx.site/tr</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://horizonx.site/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://horizonx.site/ar"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://horizonx.site/fr"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://horizonx.site/es"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://horizonx.site/de"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://horizonx.site/tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://horizonx.site/"/>
   </url>
   <url>
     <loc>https://horizonx.site/xbrain</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://horizonx.site/xbrain"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://horizonx.site/ar/xbrain"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://horizonx.site/fr/xbrain"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://horizonx.site/es/xbrain"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://horizonx.site/de/xbrain"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://horizonx.site/tr/xbrain"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://horizonx.site/xbrain"/>
+  </url>
+  <url>
+    <loc>https://horizonx.site/ar/xbrain</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://horizonx.site/xbrain"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://horizonx.site/ar/xbrain"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://horizonx.site/fr/xbrain"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://horizonx.site/es/xbrain"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://horizonx.site/de/xbrain"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://horizonx.site/tr/xbrain"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://horizonx.site/xbrain"/>
+  </url>
+  <url>
+    <loc>https://horizonx.site/fr/xbrain</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://horizonx.site/xbrain"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://horizonx.site/ar/xbrain"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://horizonx.site/fr/xbrain"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://horizonx.site/es/xbrain"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://horizonx.site/de/xbrain"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://horizonx.site/tr/xbrain"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://horizonx.site/xbrain"/>
+  </url>
+  <url>
+    <loc>https://horizonx.site/es/xbrain</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://horizonx.site/xbrain"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://horizonx.site/ar/xbrain"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://horizonx.site/fr/xbrain"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://horizonx.site/es/xbrain"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://horizonx.site/de/xbrain"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://horizonx.site/tr/xbrain"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://horizonx.site/xbrain"/>
+  </url>
+  <url>
+    <loc>https://horizonx.site/de/xbrain</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://horizonx.site/xbrain"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://horizonx.site/ar/xbrain"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://horizonx.site/fr/xbrain"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://horizonx.site/es/xbrain"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://horizonx.site/de/xbrain"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://horizonx.site/tr/xbrain"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://horizonx.site/xbrain"/>
+  </url>
+  <url>
+    <loc>https://horizonx.site/tr/xbrain</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://horizonx.site/xbrain"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://horizonx.site/ar/xbrain"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://horizonx.site/fr/xbrain"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://horizonx.site/es/xbrain"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://horizonx.site/de/xbrain"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://horizonx.site/tr/xbrain"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://horizonx.site/xbrain"/>
   </url>
   <url>
     <loc>https://horizonx.site/investors</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://horizonx.site/investors"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://horizonx.site/ar/investors"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://horizonx.site/fr/investors"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://horizonx.site/es/investors"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://horizonx.site/de/investors"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://horizonx.site/tr/investors"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://horizonx.site/investors"/>
+  </url>
+  <url>
+    <loc>https://horizonx.site/ar/investors</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://horizonx.site/investors"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://horizonx.site/ar/investors"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://horizonx.site/fr/investors"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://horizonx.site/es/investors"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://horizonx.site/de/investors"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://horizonx.site/tr/investors"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://horizonx.site/investors"/>
+  </url>
+  <url>
+    <loc>https://horizonx.site/fr/investors</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://horizonx.site/investors"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://horizonx.site/ar/investors"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://horizonx.site/fr/investors"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://horizonx.site/es/investors"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://horizonx.site/de/investors"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://horizonx.site/tr/investors"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://horizonx.site/investors"/>
+  </url>
+  <url>
+    <loc>https://horizonx.site/es/investors</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://horizonx.site/investors"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://horizonx.site/ar/investors"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://horizonx.site/fr/investors"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://horizonx.site/es/investors"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://horizonx.site/de/investors"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://horizonx.site/tr/investors"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://horizonx.site/investors"/>
+  </url>
+  <url>
+    <loc>https://horizonx.site/de/investors</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://horizonx.site/investors"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://horizonx.site/ar/investors"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://horizonx.site/fr/investors"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://horizonx.site/es/investors"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://horizonx.site/de/investors"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://horizonx.site/tr/investors"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://horizonx.site/investors"/>
+  </url>
+  <url>
+    <loc>https://horizonx.site/tr/investors</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://horizonx.site/investors"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://horizonx.site/ar/investors"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://horizonx.site/fr/investors"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://horizonx.site/es/investors"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://horizonx.site/de/investors"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://horizonx.site/tr/investors"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://horizonx.site/investors"/>
+  </url>
+  <url>
+    <loc>https://horizonx.site/digital-transformation/restaurants</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://horizonx.site/digital-transformation/restaurants"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://horizonx.site/digital-transformation/restaurants"/>
+  </url>
+  <url>
+    <loc>https://horizonx.site/digital-transformation/clinics</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://horizonx.site/digital-transformation/clinics"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://horizonx.site/digital-transformation/clinics"/>
   </url>
 </urlset>

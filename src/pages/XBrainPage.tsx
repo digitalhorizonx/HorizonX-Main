@@ -2,9 +2,13 @@ import { usePageMeta } from "../lib/usePageMeta";
 import { FLAGSHIP } from "../lib/ecosystem";
 import { useI18n } from "../i18n";
 import { XBrainNetwork, XBrainNetworkList } from "../components/XBrainNetwork";
+import { JsonLd } from "../components/JsonLd";
+import { breadcrumbSchema, webPageSchema } from "../seo/schema";
+import { localePath } from "../i18n";
 
 export function XBrainPage() {
-  const { t, href } = useI18n();
+  const { t, href, locale } = useI18n();
+  const url = FLAGSHIP.url + localePath(locale, FLAGSHIP.routes.xbrain);
 
   usePageMeta({
     title: t.meta.xbrain.title,
@@ -14,6 +18,11 @@ export function XBrainPage() {
 
   return (
     <main className="subpage" id="xbrain">
+      <JsonLd data={webPageSchema({ title: t.meta.xbrain.title, description: t.meta.xbrain.description, url, locale })} />
+      <JsonLd data={breadcrumbSchema([
+        { name: "HorizonX", url: FLAGSHIP.url + localePath(locale, "/") },
+        { name: "XBrain", url },
+      ])} />
       <section className="subpage__hero">
         <div className="hx-container subpage__hero-inner">
           <p className="hx-kicker">{t.xbrainPage.kicker}</p>

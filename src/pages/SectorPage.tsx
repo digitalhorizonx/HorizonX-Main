@@ -17,6 +17,7 @@ export function SectorPage({ sector }: { sector: SectorContent }) {
     title: sector.metaTitle,
     description: sector.metaDescription,
     path,
+    localized: false,
   });
 
   return (
