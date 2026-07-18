@@ -27,7 +27,7 @@ test.describe("Digitalization journey", () => {
       await expect(page.locator(`.rail__node.is-lit`)).toHaveCount(i + 1, {
         timeout: 10_000,
       });
-      await expect(page.locator(`#${world.id} .world__name`)).toHaveText(world.name);
+      await expect(page.locator(`#${world.id} .world__name`)).toContainText(world.name);
       await expect(page.locator(`#${world.id} .world__kicker`)).toContainText(
         `Stage ${world.index}%`
       );

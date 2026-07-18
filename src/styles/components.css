@@ -254,7 +254,8 @@
     padding: 0.5em 1.2em;
   }
 
-  .nav__divider {
+  /* specificity bump: these must beat the base rules declared later */
+  .nav__links .nav__divider {
     width: 40px;
     height: 1px;
     margin: var(--hx-s2) 0;
@@ -264,13 +265,11 @@
     display: flex;
   }
 
-
-
-  .nav__desktop-controls {
+  .nav__meta .nav__desktop-controls {
     display: none;
   }
 
-  .nav__mobile-controls {
+  .nav__links .nav__mobile-controls {
     display: flex;
   }
 }
@@ -559,14 +558,25 @@
   backdrop-filter: blur(var(--hx-glass-blur));
   -webkit-backdrop-filter: blur(var(--hx-glass-blur));
   box-shadow: var(--hx-shadow-2);
-  transition: box-shadow var(--hx-dur-base), transform var(--hx-dur-base) var(--hx-ease-spring);
-  animation: vg-drift 8s ease-in-out infinite;
+  transition: box-shadow var(--hx-dur-base);
+  /* drift keyframes must preserve the centering translate — a plain
+     translateY animation would replace it and shift nodes by half a size */
+  animation: xbnet-drift 8s ease-in-out infinite;
   animation-delay: calc(var(--n) * -1.6s);
   z-index: 2;
 }
 
+@keyframes xbnet-drift {
+  0%,
+  100% {
+    transform: translate(-50%, -50%);
+  }
+  50% {
+    transform: translate(-50%, calc(-50% - 12px));
+  }
+}
+
 a.xbnet__node:hover {
-  transform: translate(-50%, -52%);
   box-shadow: 0 0 34px color-mix(in srgb, var(--w-color) 30%, transparent), var(--hx-shadow-2);
 }
 
