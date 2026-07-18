@@ -6,8 +6,10 @@ import { Preloader } from "./components/Preloader";
 import { Nav } from "./components/Nav";
 import { ProgressRail } from "./components/ProgressRail";
 import { Hero } from "./components/Hero";
+import { Problem } from "./components/Problem";
 import { IndexDial } from "./components/IndexDial";
 import { WorldSection } from "./components/WorldSection";
+import { XBrainSection } from "./components/XBrainSection";
 import { Calculator } from "./components/Calculator";
 import { XVerse } from "./components/XVerse";
 import { Footer } from "./components/Footer";
@@ -26,12 +28,14 @@ export default function App() {
       <ProgressRail />
       <main className="page">
         <Hero />
+        <Problem />
         <IndexDial />
         <div id="journey">
           {WORLDS.map((world, i) => (
             <WorldSection key={world.id} world={world} order={i} />
           ))}
         </div>
+        <XBrainSection />
         <Calculator />
         <XVerse />
       </main>
