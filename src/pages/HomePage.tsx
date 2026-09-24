@@ -11,6 +11,7 @@ import { Problem } from "../components/Problem";
 import { IndexDial } from "../components/IndexDial";
 import { WorldSection } from "../components/WorldSection";
 import { XBrainSection } from "../components/XBrainSection";
+import { FutureVision } from "../components/FutureVision";
 import { Calculator } from "../components/Calculator";
 import { XVerse } from "../components/XVerse";
 import { JsonLd } from "../components/JsonLd";
@@ -53,6 +54,7 @@ export function HomePage() {
           ))}
         </div>
         <XBrainSection />
+        <FutureVision />
         <Calculator />
         <XVerse />
       </main>
