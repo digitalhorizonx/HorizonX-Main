@@ -165,3 +165,55 @@ test.describe("Content integrity", () => {
     }
   });
 });
+
+/**
+ * GEO / answer-engine readiness. Most AI crawlers do not run JavaScript, so
+ * these read the RAW HTML a crawler receives (no browser rendering): every
+ * public route must answer 200 with its own content, metadata and JSON-LD
+ * already in the file (scripts/prerender.mjs).
+ */
+test.describe("Prerendered HTML for crawlers that do not run JavaScript", () => {
+  const localePath = (locale: string, path: string) =>
+    locale === routesData.defaultLocale ? path : path === "/" ? `/${locale}` : `/${locale}${path}`;
+  const allPaths = [
+    ...routesData.localizedRoutes.flatMap((route) =>
+      routesData.locales.map((code) => localePath(code, route))
+    ),
+    ...routesData.englishOnlyRoutes,
+  ];
+
+  for (const path of allPaths) {
+    test(`raw HTML of ${path} carries its own content and metadata`, async ({ request }) => {
+      const res = await request.get(path);
+      expect(res.status()).toBe(200);
+      const html = await res.text();
+      expect(html).toContain(`<link rel="canonical" href="https://horizonx.site${path}">`);
+      expect(html).toContain('type="application/ld+json"');
+      const text = html
+        .replace(/<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>/g, "")
+        .replace(/<[^>]+>/g, " ")
+        .replace(/\s+/g, " ");
+      expect(text.length).toBeGreaterThan(1500);
+      const locale = path.split("/")[1];
+      if (routesData.locales.includes(locale)) expect(html).toMatch(new RegExp(`<html[^>]*lang="${locale}"`));
+    });
+  }
+
+  test("llms.txt summarizes HorizonX for language models", async ({ request }) => {
+    const res = await request.get("/llms.txt");
+    expect(res.status()).toBe(200);
+    const text = await res.text();
+    expect(text.startsWith("# HorizonX")).toBe(true);
+    for (const url of ["https://xability.horizonx.site", "https://horizonx.site/xbrain"]) {
+      expect(text).toContain(url);
+    }
+    expect(text).not.toContain("claude.horizonx.site");
+  });
+
+  test("robots.txt explicitly admits AI answer-engine crawlers", async ({ request }) => {
+    const text = await (await request.get("/robots.txt")).text();
+    for (const bot of ["GPTBot", "ClaudeBot", "PerplexityBot", "Google-Extended"]) {
+      expect(text).toContain(`User-agent: ${bot}`);
+    }
+  });
+});

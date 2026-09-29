@@ -11,10 +11,28 @@
 - `<html lang dir>` (set by the i18n provider)
 
 English-only routes (sector pages) emit self-canonical + `en`/`x-default`
-alternates only. Static tags in `index.html` carry the English homepage
-defaults — that is what non-JS crawlers see on every route, a documented
-limitation of static SPA hosting on GitHub Pages; JS-rendering crawlers
-(Google, Bing) receive the specialized per-route set.
+alternates only.
+
+## Prerendering (static HTML per route)
+
+`scripts/prerender.mjs` runs at the end of `npm run build`. It serves the
+production build, renders every route in `src/seo/routes.json` (all
+locale × route combinations plus the sector pages — 20 URLs) in headless
+Chromium, and writes the finished HTML to `dist/<route>.html` and
+`dist/<route>/index.html`. Each file carries the route's own text, title,
+description, canonical, hreflang graph, `<html lang dir>` and JSON-LD, so:
+
+- every public URL answers **HTTP 200** (before, everything except `/` was
+  served through the `404.html` fallback, i.e. with a 404 status);
+- crawlers that do not execute JavaScript — most AI answer-engine crawlers
+  (GPTBot, ClaudeBot, PerplexityBot, …) — read the real content and
+  structured data.
+
+The browser then boots the app normally: `createRoot()` replaces `#root`
+and `usePageMeta()` rewrites the managed head tags, so nothing duplicates.
+The plain app shell is kept as `404.html` for genuinely unknown URLs. CI
+installs Chromium before the build for this step. `tests/seo.spec.ts`
+reads the raw HTML of every route (no rendering) to keep this true.
 
 ## Structured data
 
@@ -39,8 +57,11 @@ visible on the same page.
 locale-route combination with `xhtml:link` hreflang alternates — currently
 20 URLs. A Playwright spec pins `routes.json` to the app's real locale and
 sector registries so the sitemap cannot drift. `robots.txt` allows all
-standard crawlers and references the sitemap; no speculative AI-crawler
-directives were added (nothing to gain, easy to get wrong).
+crawlers, names the main AI search/assistant crawlers explicitly (owner
+decision 2026-09-29: HorizonX wants to be read and cited by answer
+engines), and references the sitemap. `public/llms.txt` is a
+plain-language summary for language models — products, key pages,
+languages and the facts to rely on — kept to published, verifiable facts.
 
 ## AI-search / answer-engine readiness
 

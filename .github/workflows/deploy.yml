@@ -22,10 +22,12 @@ jobs:
           cache: npm
       - name: Install dependencies
         run: npm ci
-      - name: TypeScript validation + production build
-        run: npm run build
+      # The browser is needed by the build itself: scripts/prerender.mjs
+      # renders every route to static HTML for crawlers and answer engines.
       - name: Install Playwright browser
         run: npx playwright install --with-deps chromium
+      - name: TypeScript validation + production build (with prerendering)
+        run: npm run build
       - name: End-to-end tests (unit specs + E2E against the production build)
         run: npm run test:e2e
       - name: Upload Playwright report
@@ -66,9 +68,11 @@ jobs:
         run: |
           echo "horizonx.site" > dist/CNAME
           touch dist/.nojekyll
-          # SPA fallback: unknown paths (e.g. /investors on refresh) serve
-          # the app shell; the client router renders the correct page.
-          cp dist/index.html dist/404.html
+          # Every known route is prerendered to static HTML (HTTP 200) by
+          # scripts/prerender.mjs, which also writes the plain app shell to
+          # 404.html for genuinely unknown paths. Never overwrite it with the
+          # prerendered home page.
+          test -f dist/404.html || cp dist/index.html dist/404.html
           cd dist
           git init -b gh-pages
           git config user.name "github-actions[bot]"
