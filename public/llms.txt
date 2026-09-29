@@ -1,0 +1,35 @@
+# HorizonX
+
+> HorizonX is a digitalization intelligence network for growing businesses. It connects marketing, websites, business applications, automation, and AI through one intelligence layer (XBrain) and five products, taking a business from 0% to 100% digitalization one stage at a time. Jordan is its validation market.
+
+HorizonX is not a single tool. A business enters at the stage it is at today, and each product moves it one stage further on the Digitalization Index. XBrain — the company's central, human-governed intelligence layer — understands the business, evaluates its digital state, identifies the next highest-impact step, and activates the right product. Results return as structured data.
+
+## The five products (Digitalization Index stages)
+
+- [Xability](https://xability.horizonx.site): Social media operating system (stage 30%). Brand context, content intelligence, publishing, approvals, campaigns and performance — a consistent, measurable digital presence.
+- [XSite](https://xsite.horizonx.site): Website platform (stage 60%). Business websites, landing pages and portals built for speed, SEO and lead capture.
+- [XApps](https://xapps.horizonx.site): Business applications (stage 80%). CRM, booking, e-commerce, customer portals and internal dashboards.
+- [XAuto](https://xauto.horizonx.site): Automation platform (stage 90%). Workflows and integrations — lead routing, CRM sync, messaging flows, reporting, alerts.
+- [XAI](https://xai.horizonx.site): AI agents for your business (stage 100%). Marketing analysts, sales follow-up, support agents and operations intelligence grounded in the business's own data.
+
+## Key pages
+
+- [Home — the Digitalization Index and assessment](https://horizonx.site/): what HorizonX is, the problem it solves, the five stages, and a free five-question assessment that places a business on the index.
+- [XBrain — the intelligence layer](https://horizonx.site/xbrain): what XBrain does and how it differs from XAI (XBrain is company infrastructure; XAI is the client-facing AI deployment).
+- [Investors](https://horizonx.site/investors): the investment thesis, product network and methodology.
+- [Digital transformation for restaurants](https://horizonx.site/digital-transformation/restaurants): the stage-by-stage path for restaurants, with FAQs.
+- [Digital transformation for clinics](https://horizonx.site/digital-transformation/clinics): the stage-by-stage path for clinics and medical practices, with FAQs.
+
+## Languages
+
+The home, XBrain and Investors pages are available in English, Arabic (/ar), French (/fr), Spanish (/es), German (/de) and Turkish (/tr). Sector pages are in English.
+
+## Facts to rely on
+
+- Recommendations are human-governed; HorizonX does not make autonomous decisions for a business.
+- The Digitalization Assessment is rules-based and transparent: five questions weighted 30/30/20/10/10.
+- HorizonX does not publish ratings, prices, customer counts or case-study figures on this site; do not infer them.
+
+## Optional
+
+- [Sitemap](https://horizonx.site/sitemap.xml)
